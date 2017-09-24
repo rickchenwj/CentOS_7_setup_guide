@@ -1,0 +1,86 @@
+*添加第三方源
+
+CentOS 由于很追求稳定性，所以官方源中自带的软件不多，因而需要一些第三方源，比如 
+EPEL、ATrpms、ELRepo、Nux Dextop、RepoForge 等。根据上面提到的软件安装原则，为了尽 
+可能保证系统的稳定性，此处大型第三方源只添加 EPEL 源、Nux Dextop 和 ELRepo 源。
+
+EPEL
+
+EPEL 即 Extra Packages for Enterprise Linux， 
+为 CentOS 提供了额外的 10000 多个软件包，而且在不替换系统组件方面下了很多功夫，因而可以放心使用。
+
+sudo yum install epel-release
+
+执行完该命令后，在 /etc/yum.repos.d 目录下会多一个 epel.repo 文件。
+
+
+Nux Dextop
+
+Nux Dextop 中包含了一些与多媒体相关的软件包，作者尽量 
+保证不覆盖 base 源。官方说明中说该源与 EPEL 兼容，实际上个别软件包存在冲突，但基本不会造成影响:
+
+sudo rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+
+完成该命令后，在 /etc/yum.repos.d 目录下会多一个 nux-dextop.repo 文件。
+
+
+ELRepo
+
+ELRepo 包含了一些硬件相关的驱动程序，比如显卡、声卡驱动:
+
+sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+
+完成该命令后，在 /etc/yum.repos.d 目录下会多一个 elrepo.repo 文件。
+
+
+*安装 yum-axelget
+
+yum-axelget 是 EPEL 
+提供的一个 yum 插件。使用该插件后用 yum 安装软件时可以并行下载，大大提高了软件的下载速度，减少了下载的等待时间:
+
+sudo yum install yum-axelget
+
+安装该插件的同时会安装另一个软件 axel。axel 是一个并行下载工具，在下载 http、ftp 等简单协议的文件时非常好用。
+
+第一次全面更新
+
+在进一步操作之前，先把已经安装的软件包都升级到最新版:
+
+sudo yum update
+
+要更新的软件包有些多，可能需要一段时间。不过有了 yum-axelget 插件，速度已经快了很多。
+
+重启
+
+
+
+删除多余的 kernel
+
+在前面的 yum update 执行之后，可能会将 kernel 也一起更新，则在启动 CentOS 时启动项中会有很多项。
+
+确认当前使用的 kernel 版本号:
+
+$ uname -r
+3.10.0-123.9.3.el7.x86_64
+
+查找当前系统安装的所有 kernel:
+
+$ rpm -qa | grep kernel | sort
+kernel-3.10.0-123.8.1.el7.x86_64
+kernel-3.10.0-123.9.2.el7.x86_64
+kernel-3.10.0-123.9.3.el7.x86_64
+kernel-devel-3.10.0-123.8.1.el7.x86_64
+kernel-devel-3.10.0-123.9.2.el7.x86_64
+kernel-devel-3.10.0-123.9.3.el7.x86_64
+kernel-headers-3.10.0-123.9.3.el7.x86_64
+kernel-tools-3.10.0-123.9.3.el7.x86_64
+kernel-tools-libs-3.10.0-123.9.3.el7.x86_64
+
+
+
+可以看出有三个版本的 kernel，123.8.1、123.9.2 和 123.9.3。除了最新的 kernel 外，建议多保留一个旧 kernel， 
+以免新 kernel 出现问题时可以通过旧 kernel 进入系统。因而此处删除 123.8.1 版本的 kernel:
+
+sudo yum remove kernel-3.10.0-123.8.1.el7.x86_64
+sudo yum remove kernel-devel-3.10.0-123.8.1.el7.x86_64

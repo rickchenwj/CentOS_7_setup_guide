@@ -1,0 +1,82 @@
+安装 CentOS
+
+CentOS 7 的安装与其他 Linux 发行版的安装差不多，个别地方稍有不同。
+
+准备工作
+
+ 1.准备材料
+
+	1.U 盘：容量 700M 以上，用于制作 U 盘启动盘，因为在制作启动盘时会格式化 U 盘，所以 U 盘内不要包含重要资料
+	2.CentOS 7.2 LiveCD ISO 镜像文件
+	3.Universal USB installer：Windows 下的 U 盘启动盘制作工具
+	4.一个已安装 Windows 的电脑：用于制作 U 盘启动盘
+ 2.运行 Universal USB installer 并制作 U 盘启动盘
+ 3.将 U 盘插入计算机，重启，进入 BIOS 选择从 U 盘启动，即可进入 CentOS 的 LiveCD
+ 4.进入 LiveCD 后，点击桌面的 “Install to Hard Drive” 即可安装
+注：Linux 下可以通过 dd 命令制作启动盘，但由于对原理不够了解，偶尔会导致制作失败， 
+或制作成功后 U 盘容量有问题，还是用 Windows 下的 Universal USB installer 比较靠谱。
+
+
+
+安装过程
+
+ 1.选择安装过程中使用的语言，这里应 * 使用英语，不要使用汉语 *。若安装界面使用汉语，最终安装的系统中会出现两个比较麻烦的问题：
+
+	1.家目录下的系统文件夹，比如 Downloads、Desktop 等会以中文表示，这使得在命令行 cd 变得很麻烦；
+	2.终端中某些字符用英文字体，某些字符用中文字体，效果非常差，需要自己修改终端字体方可；
+ 2.选择区域和城市：Asia 和 Shanghai
+
+ 3.键盘使用 English(US) 而不是 English(UK)
+ 4.Hostname 可以改也可以不改，我用 saturn.geolab
+ 5.安装的目的地，选择要使用的硬盘，在 “Other Storage Options” 处选择“I will configure partioning”，即手动分区
+
+
+
+分区
+
+CentOS7 的分区似乎比较特别，自认为经验很丰富的我在第一次安装 CentOS7 时还是在分区上耽误了很多时间。后来找到比较合适的分区方法，如下：
+
+·点击 “Click here to create them automatically”，即让安装程序帮忙分区
+·默认的分区方案是使用 LVM，其好处在于 “当机器有多块硬盘时，在使用的时候看上去只有一块”
+·默认的文件系统为 XFS 而不是以前常用的 EXT4；
+·自动分区完成后，再根据自己的需求，手动修改分区细节 
+	·/boot ：CentOS 自动分配，一定不要乱改；
+	·/ ：根目录，合理使用并及时清理的话 15G 就够了，不过建议 30G 以上；
+	·swap ：与物理内存大小一致即可
+	·/opt ：个人习惯是将第三方软件都安装在 /opt 下，所以分了 70G
+	·/home ：余下的全部空间
+·点击 “Begin to Install” 开始安装
+
+
+
+真正的安装
+
+1.设置 root 密码
+2.创建一般用户
+3.等待安装完成
+4.安装完成，重启
+5.重启后，同意 License 即可
+
+
+
+对系统的若干修改
+
+·若干原则
+
+为了搭建一个稳定的系统，尽量避免因为各种瞎折腾而导致的系统问题，特订立了一些软件安装的原则。 
+具体参见《CentOS7 下的软件安装方法与策略》。
+
+·给一般账号 root 权限
+
+默认情况下，一般账号是没有 root 权限的。为什么不直接用 root 账号，而是要给一般账号 root 权限呢？
+
+	·日常工作中使用 root 账号，是非常糟糕且危险的习惯！无论是服务器还是个人电脑都是如此。
+	·安装软件时需要 root 权限，只能 su 切换到 root 账户再安装。对于习惯使用 sudo 的人来说，还是有些麻烦。
+假设账户名为 rickchen，要授予他 root 权限，则要修改配置文件 /etc/sudoers :
+
+$ su
+# echo 'rickchen ALL=(ALL) ALL'>> /etc/sudoers # 向配置文件中加入语句
+# tail -1 /etc/sudoers  # 检查一下是否正确
+rickchen ALL=(ALL) ALL
+
+其中 rickchen 为当前用户名。

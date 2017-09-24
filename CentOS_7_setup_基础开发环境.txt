@@ -1,0 +1,43 @@
+基础开发环境
+
+
+GCC 系列
+
+sudo yum install gcc                     # C 编译器
+sudo yum install gcc-c++                 # C++ 编译器
+sudo yum install gcc-gfortran            # Fortran 编译器
+sudo yum install compat-gcc-44           # 兼容 gcc 4.4
+sudo yum install compat-gcc-44-c++       # 兼容 gcc-c++ 4.4
+sudo yum install compat-gcc-44-gfortran  # 兼容 gcc-fortran 4.4
+sudo yum install compat-libf2c-34        # g77 3.4.x 兼容库
+
+
+软件开发辅助工具
+
+sudo yum install make
+sudo yum install gdb     # 代码调试器
+sudo yum install cmake   # Cmake
+sudo yum install git     # 版本控制
+sudo yum install tig     # git 的文本模式接口
+sudo yum install git-svn # git 的 svn 插件
+
+
+驱动程序
+
+显卡驱动
+
+Linux 默认只使用开源的显卡驱动，就目前的情况来看，开源驱动的效果还是不错的，但跟官方的 
+闭源驱动相比还是有一定差距。最明显的区别是，在使用 SAC 的 ppk 功能放大波形时，使用开源驱动会 
+出现延迟，而使用官方闭源则整个过程非常顺畅。
+
+关于显卡驱动的安装，请参考 Linux 下安装 nvidia 显卡驱动 
+一文中的 “从 ELRepo 源中安装驱动” 部分。
+
+注意：目前的显卡驱动似乎有问题，安装后终端有时会出现屏幕闪烁、一屏文字上下重复跳动的情况， 
+稍微有些影响用 vim 写代码。是否要安装显卡驱动自己决定。
+
+NTFS 驱动
+
+CentOS 下默认无法挂载 NTFS 格式的硬盘。需安装 nfts-3g 即可实现即插即用:
+
+sudo yum install ntfs-3g

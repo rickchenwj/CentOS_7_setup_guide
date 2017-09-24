@@ -1,0 +1,64 @@
+脚本语言环境
+
+Perl
+
+CentOS 7.0 自带了 Perl 5.16.3（2013 年 03 月 11 日发布），目前的最新版本为 5.20.1（2014 年 09 月 14 日发布）。
+
+系统自带 Perl
+
+系统自带 Perl，就目前来看，版本不算老，基本够用。官方源和 EPEL 源中提供了 1000 多个模块，可以直接用 yum 安装:
+
+sudo yum install perl-Parallel-ForkManager  # 并行模块
+1
+2
+若源中没有已打包好的模块，也可以使用 perl 自带的 cpan 来安装模块。
+
+优先级：yum > cpan。
+
+plenv 管理新版本
+
+若需要使用最新版本的 perl，可以使用 plenv 安装新版本的 perl，并使用 plenv 提供的 cpanm 命令安装模块:
+
+cpanm install Parallel::ForkManager # 并行模块
+1
+2
+Python
+
+CentOS 7.0 自带 Python 2.7.5，目前 Python 2 的最新版本为 2.7.8，Python 3 的最新版本为 3.4.2。
+
+系统自带 Python
+
+系统自带的 Python 2.7.5，基本已经够用，Python 2 常用的模块在官方源或 EPEL 源中也有有编译好的包， 
+因而直接通过 yum 安装即可:
+
+sudo yum install python-matplotlib  # 2D 绘图库
+sudo yum install PyQt4  # Qt4 的 Python 绑定
+sudo yum install numpy  # 数组操作库
+sudo yum install scipy  # 科学计算库
+sudo yum install python-requests  # 网页请求
+sudo yum install python-docopt  # 命令行参数分析器
+sudo yum install gdal-python    # gdal 的 Python 绑定
+
+
+pyenv 管理 Python3
+
+Python2 与 Python3 之间是不完全兼容的，而我以 Python3 为主，所以需要安装一个 Python3。
+
+首先，安装 pyenv 来管理多个 Python 版本，然后利用 pyenv 安装 anaconda3 
+（即 Python3.4）。anaconda 自带了众多科学计算所需的包，免去了安装的麻烦，对于其他包， 
+则可以利用 Python 自带的 pip 安装:
+
+pip install requests
+pip install docopt
+
+
+编程相关软件
+
+编辑器
+
+vim
+sublime text 3
+Visual Studio Code
+IDE
+
+Python IDE：PyCharm Community Edition
