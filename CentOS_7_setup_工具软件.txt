@@ -1,0 +1,72 @@
+工具软件
+
+视频下载工具
+
+you-get 和 youtube-dl 
+是两个用于从视频网站上下载视频文件的工具。其中，后者支持的网站更多，但前者对国内的视频网站支持更好。
+
+pip install you-get
+pip install youtube-dl
+# EPEL 中提供了 youtube-dl 包，因而也可以使用 yum 安装。一般来说，pip 安装的版本更新一些
+
+
+
+
+PDF 处理工具
+
+cpdf 是一个跨平台的 PDF 处理工具，可以完成常见的 PDF 合并、 
+切割、加密解密、书签、水印等功能。
+
+下载已编译好的 二进制包， 
+https://github.com/coherentgraphics/cpdf-binaries/archive/master.zip
+解压，并将与自己的平台对应的二进制文件复制到 ${HOME}/bin 目录下即可使用。
+
+
+
+
+BT 软件
+
+transmission 是 Linux 下常用的 Torrent 下载软件:
+
+sudo yum install transmission
+
+在 “Application”->“Internet”-> 中可以启动 transmission。
+
+
+
+
+
+uGet
+
+http://ugetdm.com/
+
+uGet 是 Linux 下的一个下载工具，支持 HTTP、HTTPS、FTP、Torrent 等，支持多连接，并可以监视剪贴板:
+
+sudo yum --enablerepo=epel-testing install uget aria2
+
+
+
+
+
+截图软件 shutter
+
+GNOME 自带了截图工具。 PrtScn 为截取整个屏幕； Alt+PrtScn 为截取当前窗口； 
+Shift+PrtScn 为自定义截屏区域。
+
+shutter 是一个功能更强大的截图工具，支持不同的截图方式、 
+图片格式，还支持图片的简单编辑与注释:
+
+sudo yum install shutter
+
+可以通过 修改快捷键使 shutter 成为默认的截图工具。
+
+
+
+
+其他工具
+
+sudo yum install nfs-utils     # 挂载 NFS 文件系统所必须
+sudo yum install xclip         # 终端的文本复制工具
+sudo yum install ImageMagick   # 其中的 import 和 convert 命令很有用
+sudo yum install dos2unix unix2dos  # Windows 和 Linux 换行符互相转换
+sudo yum install meld          # 图形界面下的文件差异比较工具

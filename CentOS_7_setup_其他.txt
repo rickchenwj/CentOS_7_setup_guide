@@ -1,0 +1,36 @@
+娱乐
+
+影音播放器
+
+Nux Dextop 提供了 mplayer 和 VLC，可以用于播放常见格式的音频和视频，二者选其一安装即可:
+
+sudo yum install mplayer
+sudo yum install vlc
+
+
+
+
+游戏
+
+sudo yum install 2048-cli   # 2048 命令行版
+
+
+
+
+
+未完成
+
+Google Earth
+
+理论上 Google Earth 应该可以跟 Google Chrome 用类似的方法来安装的，但是由于 Google Earth 的 
+rpm 包存在 bug，导致无法通过上面的方法安装。
+
+$ cd -
+$ wget https://dl.google.com/dl/earth/client/current/google-earth-stable_current_x86_64.rpm
+$ rpm2cpio google-earth-stable_current_x86_64.rpm | cpio -div
+$ sudo cp -r opt/google/earth /opt/google/
+$ sudo cp etc/cron.daily/google-earth /etc/cron.daily/
+$ rm -rf usr opt etc
+$ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
+
+安装完成后，启动后奔溃。。

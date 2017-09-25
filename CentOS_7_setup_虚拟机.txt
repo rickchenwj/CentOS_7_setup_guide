@@ -1,0 +1,38 @@
+虚拟机
+
+有时候可能需要在 Windows 下做一些操作，如果机器性能足够好的话，可以安装虚拟机。
+
+
+
+
+VirtualBox 虚拟机
+
+VirtuabBox 的安装:
+
+wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+sudo mv virtualbox.repo /etc/yum.repos.d/
+s
+需要注意两点：
+
+若机器性能不够，虚拟机的使用体验会非常差，所以不建议在老机器上使用；
+更新 kernel 之后需要执行 sudo /etc/init.d/vboxdrv setup ；
+在 VirtualBox 安装虚拟系统后，记得使用 “设备”->“安装增强功能”，使用效果会更好；
+
+
+
+
+gnome-boxes
+
+gnome-boxes 是 GNOME3 开发的一个虚拟机工具，使用体验不如 VirtualBox:
+
+sudo yum install gnome-boxes
+
+
+
+
+
+Wine
+
+Wine 是一个可以让 Windows 程序运行在 Linux 下的软件。类似虚拟机，但跟虚拟机又不太一样:
+
+sudo yum install wine

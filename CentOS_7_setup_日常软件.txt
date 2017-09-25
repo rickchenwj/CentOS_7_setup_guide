@@ -1,0 +1,191 @@
+日常软件
+
+Office 套件
+
+
+
+
+LibreOffice
+
+大多数 Linux 发行版都自带 LibreOffice:
+
+sudo yum install libreoffice
+
+LibreOffice 与 Microsoft Office 的兼容性不太好，操作界面与 MS Office 也有较大差异，让人不太习惯。
+
+
+
+
+WPS Office
+
+若在 Linux 下对于文档处理有更高一些的要求，可以尝试目前还处于测试版的 WPS Office for Linux。 
+WPS Office 的兼容性以及界面都比 LibreOffice 要好很多，值得期待，当然还是不能做到完全兼容 MS 
+Office。
+
+1. 安装32位开发库：
+yum install xulrunner.i686
+yum install libXtst.i686
+
+2. 在官网下载 wps-office-8.1.0.3724-0.1.b1p2.i686.rpm
+安装：rpm -ivh wps-office-8.1.0.3724-0.1.b1p2.i686.rpm
+
+3.可能报的依赖错误：
+error: Failed dependencies:
+libmng.so.1 is needed by wps-office-8.1.0.3724-0.1.b1p2.i686
+libpng12.so.0 is needed by wps-office-8.1.0.3724-0.1.b1p2.i686
+libGLU.so.1 is needed by wps-office-8.1.0.3724-0.1.b1p2.i686
+解决：
+安装libmng: yum install libmng.i686
+安装libpng12: 一般来说CentOS7已经有了较高版本的libpng，可以通过
+ls -l /usr/lib/libpng*
+看到，这时候用yum install 就会提示存在，这种情况可以从这个地址下载RPM包:libpng12-1.2.50-6.el7.i686.rpm
+安装: rpm -ivh libpng12-1.2.50-6.el7.i686.rpm
+安装mesa-libGLU: yum install mesa-libGLU.i686
+如果出现个别依赖确实解决不了的，可以加上–nodeps试试:
+rpm -ivh wps-office-8.1.0.3724-0.1.b1p2.i686.rpm --nodeps
+
+ 
+
+ 
+
+在官方页面下载RPM文件.官方RPM包只支持32位版本linux，但是你可以在64位中安装。
+
+需要使用yum命令并用"localinstall"选项来本地安装这个RPM包
+
+yum localinstall kingsoft-office-9.1.0.4244-0.1.a12p3.i686.rpm
+
+注意不要使用rpm命令安装。否者，你会得到依赖错误，而且很难解决：
+
+    错误: 依赖失败:
+           
+
+复制代码
+代码如下:
+libICE.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libSM.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libX11.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXext.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libXrender.so.1 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+libc.so.6 is needed by kingsoft-office-9.1.0.4244-0.1.a12p3.i686
+基于Red Hat的发行版有多重库支持。如果你要想安装的RPM包是32位的并有32位库依赖（你的系统是64位的），一个很好的解决方法就是使用yum来安装。只要RPM在构建时候已经添加所有依赖关系，yum就可以自动使用yum库解决依赖关系。
+
+
+
+
+PS/PDF 阅读器
+
+系统自带的 evince 阅读器，可以打开 PS 和 PDF 文件，基本足够日常的使用了。
+
+zathura
+
+zathura 可以查看 PS、PDF、djvu 格式的文件，可以作为 evince 的替代品:
+
+sudo yum install zathura zathura-plugins-all
+
+ghostscript
+
+sudo yum install ghostscript
+
+master-pdf-editor
+
+官方网站: https://code-industry.net/free-pdf-editor/
+
+sudo yum localinstall http://get.code-industry.net/public/master-pdf-editor3-3.2.62-1.x86_64.rpm
+
+
+
+
+
+TeX Live 2015
+
+系统是自带了 TeXLive，版本较老，还是安装最新版比较好。
+
+参考 Linux 下安装 TeXLive 一文。
+
+Mendeley
+
+Mendeley 是一个跨平台的文献管理软件，其内部自带了一个可以添加注释的 PDF 阅读器。
+
+下载 Generic Linux (64 bits)：http://www.mendeley.com/download-mendeley-desktop
+
+安装:
+
+tar -xvf mendeleydesktop-1.12.3-linux-x86_64.tar.bz2  # 解压
+sudo mv mendeleydesktop /opt  # 复制到 / opt 下
+cd /opt/mendeleydesktop/bin   # cd 进去
+./install-mendeley-link-handler.sh /opt/mendeleydesktop/bin/mendeleydesktop
+sudo yum install qtwebkit  # 安装依赖包
+
+注销重新登陆，在 Application->Education 下即可看到 mendeley 的相关项目。不过是 
+没有软件的图标的，强迫症不能忍，用下面的命令解决:
+
+cp /opt/mendeleydesktop/share/icons/hicolor/128x128/apps/mendeleydesktop.png ~/.local/share/icons/
+
+
+
+
+
+Google Chrome 浏览器
+
+默认的浏览器是 Firefox，还是更喜欢 Chrome 浏览器。
+
+Google 官方源在国内可能无法正常访问，故而添加 Fedora 中文社区提供的镜像源:
+
+sudo wget http://repo.fdzh.org/chrome/google-chrome-mirrors.repo -P /etc/yum.repos.d/
+
+安装:
+
+sudo yum install google-chrome-stable
+
+
+
+
+Opera 浏览器
+
+也可以选择 Opera 浏览器。
+
+下载地址：http://www.opera.com/download/guide/?os=linux
+
+选择 CentOS RPM package 进行下载。下载完成后，执行:
+
+sudo yum localinstall opera-12.16-1860.x86_64.rpm
+
+想要卸载的话，就执行:
+
+sudo yum remove opera
+
+
+
+
+
+Flash 插件
+
+Flash 插件主要是看在线视频的时候要用。Google 浏览器自带了 Flash 插件，所以这里安装的 flash 插件主要是为了 firefox。
+
+sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
+sudo yum install flash-plugin
+
+
+
+
+
+解压软件
+
+解压 7z 或 zip 格式需要 p7zip，由 EPEL 提供:
+
+sudo yum install p7zip
+
+解压 rar 格式需要 unrar，该软件由 Nux Dextop 提供:
+
+sudo yum install unrar
+
+
+
+
+
+FTP 客户端
+
+FTP 客户端，还是有界面的 filezilla 比较方便些。
+
+sudo yum install filezilla

@@ -1,0 +1,47 @@
+同步网盘
+
+网盘根据功能大概可以分为两类：同步网盘和备份网盘。既然是同步网盘，Linux 下 
+的客户端必不可少。就目前已知的情况来看，CentOS7 下能使用的同步网盘只有三个： 
+Dropbox、MEGA 和坚果云。
+
+我主要用同步网盘将 Linux 机器上的 PDF 文献同步到 pad 上。
+
+
+
+
+Dropbox
+
+又是一个被墙的工具，熟练掌握科学上网技巧的人可以使用，一般人还是不要用了。
+
+wget https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
+sudo rpm -i nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
+
+
+
+
+MEGA
+
+MEGA： https://mega.co.nz/
+
+免费容量 50G，作为同步盘来说基本是够用了。
+
+# 下载主程序
+wget https://mega.nz/linux/MEGAsync/CentOS_7/x86_64/megasync-CentOS_7.x86_64.rpm
+# 下载文件管理器扩展（可选）
+wget https://mega.nz/linux/MEGAsync/CentOS_7/x86_64/nautilus-megasync-CentOS_7.x86_64.rpm
+sudo yum localinstall megasync-CentOS_7.x86_64.rpm
+sudo yum localinstall nautilus-megasync-CentOS_7.x86_64.rpm
+
+
+
+
+
+坚果云
+
+国内的全平台同步网盘，不限空间，但限制每月上传流量 1G，下载流量 3G。
+
+# 坚果云依赖于 notify-python
+sudo yum install notify-python
+# 下载
+wget https://jianguoyun.com/static/exe/installer/fedora/nautilus_nutstore_amd64.rpm
+sudo rpm -i nautilus_nutstore_amd64.rpm

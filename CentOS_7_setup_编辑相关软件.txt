@@ -1,0 +1,50 @@
+编程相关软件
+
+编辑器
+
+vim
+
+#sudo yum -y install vim*
+
+
+sublime text 3
+
+首先需要下载sublime,可以直接在centos7中下载,也可以在Windows中下载后通过ftp传入centos7 
+这里直接在centos7通过官网下载,注意下载的是Ubuntu64位tarball包 
+
+
+Visual Studio Code
+
+
+
+
+
+
+IDE
+
+Python IDE：PyCharm Community Edition
+
+下载Pycharm安装包，网上很多教程里的这个网址已经不复存在
+
+wget http://download.jetbrains.com/python/pycharm-professional-3.0.tar.gz
+
+最好的方法是去官网下载比较新的版本，这个网址不会变：选择要下载的版本，而且相对来说下载速度很快。
+
+http://www.jetbrains.com/pycharm/
+
+
+
+将此安装包放在Centos一个文件夹里，新建一个文件夹Pycharm，解压
+tar zxvf xxx.tar.gz 例如pycharm-community-2016.3.2.tar
+
+进入解压后的目录，再进入bin目录：
+
+#cd pycharm-community-2016.3.2
+#cd bin
+
+赋予权限
+
+#chmod +x pycharm.sh
+#sh pycharm.sh
+
+接下来安装就行了
